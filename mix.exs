@@ -33,14 +33,14 @@ defmodule Hopper.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.11"},
-      {:phoenix_pubsub, "~> 1.1"},
-      {:phoenix_ecto, "~> 4.0"},
-      {:ecto_aql, git: "git://github.com/rasjonell/ecto_aql.git"},
-      {:postgrex, ">= 0.0.0"},
-      {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:gettext, "~> 0.11"},
+      {:phoenix, "~> 1.4.11"},
+      {:postgrex, ">= 0.0.0"},
+      {:plug_cowboy, "~> 2.0"},
+      {:phoenix_ecto, "~> 4.0"},
+      {:phoenix_pubsub, "~> 1.1"},
+      {:ecto_aql, git: "git://github.com/SquashConsulting/ecto_aql.git"}
     ]
   end
 
