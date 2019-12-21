@@ -1,11 +1,11 @@
 defmodule Hopper.Repo.Migrations.CreateUsers do
-  alias Elixir.Hopper.Repo
+  import Elixir.Hopper.Repo, only: :functions
 
   def up do
-    Repo.create_collection("users", :document)
+    create_collection("users", :document)
   end
 
   def down do
-    Repo.drop_collection("users")
+    drop_collection("users")
   end
 end
