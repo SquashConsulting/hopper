@@ -7,5 +7,7 @@ defmodule HopperWeb.Router do
 
   scope "/api", HopperWeb do
     pipe_through :api
+
+    resources "/users", UserController, except: [:new, :edit]
   end
 end
