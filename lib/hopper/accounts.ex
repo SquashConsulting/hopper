@@ -5,6 +5,7 @@ defmodule Hopper.Accounts do
 
   alias Hopper.Repo
 
+  alias Hopper.Rides
   alias Hopper.Accounts.User
 
   @doc """
@@ -117,6 +118,11 @@ defmodule Hopper.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  def create_ride(user_id, %{"used_as" => as, "route_id" => route_id}) do
+    {:ok, _} = Rides.create_used(%{_from: "users/#{user_id}", _to: "routes/#{route_id}", as: as})
+    get_user(user_id)
   end
 
   defp used_routes(vertex) do
