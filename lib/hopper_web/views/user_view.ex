@@ -1,7 +1,7 @@
 defmodule HopperWeb.UserView do
   use HopperWeb, :view
 
-  alias HopperWeb.UserView
+  alias HopperWeb.{UserView, RouteView}
 
   def render("index.json", %{users: users}) do
     %{data: render_many(users, UserView, "user.json")}
@@ -15,7 +15,8 @@ defmodule HopperWeb.UserView do
     %{
       id: user["_key"],
       email: user["email"],
-      username: user["username"]
+      username: user["username"],
+      rides: RouteView.render("user.json", routes: user["routes"])
     }
   end
 end
