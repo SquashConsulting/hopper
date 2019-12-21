@@ -1,5 +1,5 @@
 defmodule Hopper.Rides.Route do
-  use Ecto.Schema
+  use Hopper.Schema
   import Ecto.Changeset
 
   schema "routes" do
