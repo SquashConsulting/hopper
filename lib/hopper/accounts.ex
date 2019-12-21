@@ -17,7 +17,15 @@ defmodule Hopper.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
+    {:ok, result} =
+      Repo.query("""
+        FOR user IN users
+          let routes = (#{used_routes("user")})
+
+          RETURN MERGE(user, { routes })
+      """)
+
+    result
   end
 
   @doc """
@@ -34,7 +42,17 @@ defmodule Hopper.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user(id), do: Repo.get(User, id)
+  def get_user(id) do
+    {:ok, result} =
+      Repo.query("""
+       let user = DOCUMENT("users/#{id}")
+       let routes = (#{used_routes("user")})
+
+       RETURN MERGE(user, { routes })
+      """)
+
+    {:ok, result |> List.first()}
+  end
 
   @doc """
   Creates a user.
@@ -99,5 +117,12 @@ defmodule Hopper.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+  end
+
+  defp used_routes(vertex) do
+    """
+      FOR v, e IN 1..1 OUTBOUND #{vertex} used
+        RETURN MERGE(v, { used_as: e.as })
+    """
   end
 end
