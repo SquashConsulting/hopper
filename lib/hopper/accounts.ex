@@ -88,15 +88,6 @@ defmodule Hopper.Accounts do
     Repo.delete(User, id)
   end
 
-  def get_keys() do
-    query = """
-      FOR user IN users
-        RETURN user._key
-    """
-
-    Repo.query(query)
-  end
-
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking user changes.
 
