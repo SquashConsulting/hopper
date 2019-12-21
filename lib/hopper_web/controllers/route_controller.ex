@@ -1,22 +1,22 @@
-defmodule HopperWeb.UserController do
+defmodule HopperWeb.RouteController do
   use HopperWeb, :controller
 
-  alias Hopper.Accounts
+  alias Hopper.Rides
 
   def index(conn, _params) do
-    users = Accounts.list_users()
+    routes = Rides.list_routes()
 
     conn
     |> put_status(:ok)
-    |> render("index.json", users: users)
+    |> render("index.json", routes: routes)
   end
 
   def show(conn, %{"id" => id}) do
-    case Accounts.get_user(id) do
-      {:ok, user} ->
+    case Rides.get_route(id) do
+      {:ok, route} ->
         conn
         |> put_status(:ok)
-        |> render("show.json", user: user)
+        |> render("show.json", route: route)
 
       {:error, 404} ->
         conn
@@ -25,12 +25,12 @@ defmodule HopperWeb.UserController do
     end
   end
 
-  def create(conn, %{"user" => user}) do
-    case Accounts.create_user(user) do
-      {:ok, user} ->
+  def create(conn, %{"route" => route}) do
+    case Rides.create_route(route) do
+      {:ok, route} ->
         conn
         |> put_status(:ok)
-        |> render("show.json", user: user)
+        |> render("show.json", route: route)
 
       {:error, _} ->
         conn
@@ -39,12 +39,12 @@ defmodule HopperWeb.UserController do
     end
   end
 
-  def update(conn, %{"user" => user, "id" => id}) do
-    case Accounts.update_user(id, user) do
-      {:ok, user} ->
+  def update(conn, %{"route" => route, "id" => id}) do
+    case Rides.update_route(id, route) do
+      {:ok, route} ->
         conn
         |> put_status(:ok)
-        |> render("show.json", user: user)
+        |> render("show.json", route: route)
 
       {:error, _} ->
         conn
@@ -54,11 +54,11 @@ defmodule HopperWeb.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    case Accounts.delete_user(id) do
+    case Rides.delete_route(id) do
       :ok ->
         conn
         |> put_status(:ok)
-        |> text("User Deleted")
+        |> text("Ride Deleted")
 
       {:error, 404} ->
         conn

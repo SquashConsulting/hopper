@@ -8,6 +8,10 @@ defmodule HopperWeb.Router do
   scope "/api", HopperWeb do
     pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
+    resources "/users", UserController, except: [:new, :edit] do
+      post "/:id/routes", UserController, :create_route
+    end
+
+    resources "/routes", RouteController, except: [:new, :edit]
   end
 end
