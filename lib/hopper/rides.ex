@@ -5,7 +5,7 @@ defmodule Hopper.Rides do
 
   alias Hopper.Repo
 
-  alias Hopper.Rides.Route
+  alias Hopper.Rides.{Route, Used}
 
   @doc """
   Returns the list of routes.
@@ -99,5 +99,11 @@ defmodule Hopper.Rides do
   """
   def change_route(%Route{} = route) do
     Route.changeset(route, %{})
+  end
+
+  def create_used(attrs \\ %{}) do
+    %Used{}
+    |> Used.changeset(attrs)
+    |> Repo.insert()
   end
 end
