@@ -21,7 +21,7 @@ defmodule HopperWeb.UserController do
       {:error, 404} ->
         conn
         |> put_status(:not_found)
-        |> text("not found")
+        |> text("Not Found")
     end
   end
 
