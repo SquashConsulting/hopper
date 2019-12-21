@@ -3,7 +3,6 @@ defmodule Hopper.Accounts do
   The Accounts context.
   """
 
-  import Ecto.Query, warn: false
   alias Hopper.Repo
 
   alias Hopper.Accounts.User
