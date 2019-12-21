@@ -66,4 +66,18 @@ defmodule HopperWeb.UserController do
         |> text("Not Found")
     end
   end
+
+  def create_ride(conn, %{"user_id" => user_id, "ride" => ride}) do
+    case Accounts.create_ride(user_id, ride) do
+      {:ok, user} ->
+        conn
+        |> put_status(:ok)
+        |> render("show.json", user: user)
+
+      {:error, _} ->
+        conn
+        |> put_status(:bad_request)
+        |> text("Bad Request")
+    end
+  end
 end
