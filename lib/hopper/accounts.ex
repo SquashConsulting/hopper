@@ -3,7 +3,6 @@ defmodule Hopper.Accounts do
   The Accounts context.
   """
 
-  import Ecto.Query, warn: false
   alias Hopper.Repo
 
   alias Hopper.Accounts.User
@@ -87,15 +86,6 @@ defmodule Hopper.Accounts do
   """
   def delete_user(id) do
     Repo.delete(User, id)
-  end
-
-  def get_keys() do
-    query = """
-      FOR user IN users
-        RETURN user._key
-    """
-
-    Repo.query(query)
   end
 
   @doc """

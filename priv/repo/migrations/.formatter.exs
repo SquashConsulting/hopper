@@ -1,4 +1,4 @@
 [
-  import_deps: [:ecto_aql],
-  inputs: ["*.exs"]
+  inputs: ["*.exs"],
+  import_deps: [:ecto_aql]
 ]
